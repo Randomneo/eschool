@@ -15,10 +15,12 @@ requires = [
     'pyramid_mako',
     'pyramid_retry',
     'pyramid_tm',
+    'pyramid_simpleform',
     'SQLAlchemy',
     'transaction',
     'zope.sqlalchemy',
     'waitress',
+    'bcrypt',
 ]
 
 tests_require = [
