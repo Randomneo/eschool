@@ -13,3 +13,4 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     name = Column(Text)
     password = Column(Text)
+    group = Column(Text)
