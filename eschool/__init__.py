@@ -5,13 +5,16 @@ from pyramid.authentication import AuthTktAuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
 
 from .restources import Root
-
+from .security import groupfinder
 
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
     authn_policy = AuthTktAuthenticationPolicy(
-        u'sosecret', hashalg=u'sha512')
+        u'sosecret',
+        hashalg=u'sha512',
+        callback=groupfinder,
+    )
     authz_policy = ACLAuthorizationPolicy()
 
     my_session_factory = SignedCookieSessionFactory(u'itsaseekreet')

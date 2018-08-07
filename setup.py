@@ -15,7 +15,7 @@ requires = [
     'pyramid_mako',
     'pyramid_retry',
     'pyramid_tm',
-    'pyramid_simpleform',
+    'pyramid_simpleform >= 0.7.dev0',
     'SQLAlchemy',
     'transaction',
     'zope.sqlalchemy',
@@ -58,6 +58,8 @@ setup(
         ],
         'console_scripts': [
             'initialize_eschool_db = eschool.scripts.initializedb:main',
+            'create_user = eschool.scripts.create_user:main',
+            'delete_all_users = eschool.scripts.delete_all_users:main',
         ],
     },
 )

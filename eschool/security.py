@@ -1,4 +1,10 @@
 import bcrypt
+from sqlalchemy.exc import SQLAlchemyError
+
+from .models.user import User
+
+import logging
+log = logging.getLogger(__name__)
 
 
 def hash_password(pw):
@@ -14,5 +20,11 @@ def check_password(expected_hash, pw):
     return False
 
 
-USERS = {'editor': hash_password('editor'),
-         'viewer': hash_password('viewer')}
+def groupfinder(userid, request):
+    try:
+        user = request.dbsession.query(User).filter(User.i == userid).one()
+        return user.group
+    except SQLAlchemyError as e:
+        log.exception(e)
+
+    return None

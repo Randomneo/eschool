@@ -10,17 +10,8 @@
 
     <title>Cookiecutter Starter project for the Pyramid Web Framework</title>
 
-    <script type="text/javascript" src="${request.static_url('eschool:static/bower_components/jquery/dist/jquery.min.js')}"></script>
     <!-- Bootstrap core CSS -->
     <link href="//oss.maxcdn.com/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${request.static_url('eschool:static/bower_components/flexslider/flexslider.css')}" rel="stylesheet">
-    <link rel="stylesheet" href="${request.static_url('eschool:static/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css')}" />
-    <script type="text/javascript" src="${request.static_url('eschool:static/bower_components/moment/min/moment.min.js')}"></script>
-    <script type="text/javascript" src="${request.static_url('eschool:static/bower_components/flexslider/jquery.flexslider.js')}"></script>
-    <script type="text/javascript" src="${request.static_url('eschool:static/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}"></script>
-
-
-    <script src="${request.static_url('eschool:static/main.js')}"></script>
 
 
     <!-- Custom styles for this scaffold -->
