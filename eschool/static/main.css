@@ -11,3 +11,11 @@
     margin-bottom: -1px;
     border-radius: 0;
 }
+
+.form-create_account .form-control {
+    margin: 10px;
+}
+
+.form-create_account input, .form-create_account .btn {
+    border-radius: 0;
+}

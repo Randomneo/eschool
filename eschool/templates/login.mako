@@ -7,8 +7,8 @@
     % endif
 
     <div class="text-center">
-	<div class="row justify-content-md-center align-items-center">
-	    <div class="col-md-6 col-lg-4" class="text-center">
+	<div class="row justify-content-md-center">
+    <div class="col-md-6 col-lg-4" class="text-center">
 		<h1 class="h3">Login</h1>
 		${renderer.begin(request.resource_url(request.root, 'login'), class_="form-sigin")}
 		${renderer.csrf_token()}
@@ -22,7 +22,7 @@
 			${renderer.submit("submit", "Submit", class_="btn btn-primary btn-block")}
 		    </div>
 		    <div class="col-7">
-			<a href="#" class="btn btn-secondary btn-block">Create account</a>
+			<a href="${request.route_path('create_account')}" class="btn btn-secondary btn-block">Create account</a>
 		    </div>
 		</div>
 		${renderer.end()}

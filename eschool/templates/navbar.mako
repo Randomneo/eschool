@@ -17,6 +17,9 @@
 		<li class="nav-item">
 		    <a href="${request.route_path('login')}" class="nav-link">Login</a>
 		</li>
+		<li class="nav-item">
+		    <a href="${request.route_path('create_account')}" class="nav-link">Signup</a>
+		</li>
 	    % else:
 		<li class="nav-item">
 		    <a href="${request.route_path('logout')}" class="nav-link">Logout</a>

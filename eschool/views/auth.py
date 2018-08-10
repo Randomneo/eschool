@@ -11,6 +11,8 @@ from pyramid.security import (
     forget,
 )
 from pyramid.httpexceptions import HTTPFound
+from pyramid_mailer.message import Message
+
 from ..models.user import User
 from ..security import check_password
 from ..schemes.user import UserSchema

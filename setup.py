@@ -16,6 +16,7 @@ requires = [
     'pyramid_retry',
     'pyramid_tm',
     'pyramid_simpleform >= 0.7.dev0',
+    'pyramid_mailer',
     'SQLAlchemy',
     'transaction',
     'zope.sqlalchemy',
