@@ -1,0 +1,13 @@
+.navbar {
+    margin-bottom: 20px;
+}
+
+.form-sigin .form-control {
+    margin: 0px;
+    padding: 20px;
+}
+
+.form-sigin input {
+    margin-bottom: -1px;
+    border-radius: 0;
+}

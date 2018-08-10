@@ -20,3 +20,4 @@ Data.fs*
 coverage
 test
 *.sqlite
+./eschool/static/node_modules/

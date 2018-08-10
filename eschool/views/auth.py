@@ -22,7 +22,7 @@ log = logging.getLogger(__name__)
 @forbidden_view_config(renderer=u'../templates/login.mako')
 def login(request):
     form = Form(request,
-                defaults={u'login': u'login',
+                defaults={u'login': u'',
                           u'password': u''},
                 schema=UserSchema())
 
