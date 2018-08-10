@@ -6,7 +6,7 @@ class Root(object):
 
     __acl__ = [
         (Allow, Everyone, u'view'),
-        (Allow, u'editor', u'edit')
+        (Allow, u'editors', u'edit')
     ]
 
     def __init__(self, request):
