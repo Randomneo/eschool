@@ -22,7 +22,7 @@ def check_password(expected_hash, pw):
 
 def groupfinder(userid, request):
     try:
-        user = request.dbsession.query(User).filter(User.name == userid).first()
+        user = request.dbsession.query(User).filter(User.username == userid).first()
         return [user.group]
     except SQLAlchemyError as e:
         log.exception(e)

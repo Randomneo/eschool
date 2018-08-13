@@ -24,7 +24,7 @@ log = logging.getLogger(__name__)
 @forbidden_view_config(renderer=u'../templates/login.mako')
 def login(request):
     form = Form(request,
-                defaults={u'login': u'',
+                defaults={u'username': u'',
                           u'password': u''},
                 schema=UserSchema())
 
@@ -39,18 +39,18 @@ def login(request):
             item = User()
             form.bind(item)
             user = request.dbsession.query(
-                User).filter(User.name == item.login).first()
+                User).filter(User.username == item.username).first()
 
             if user is None:
                 raise IndexError(u"Wrong username or password")
             db_password = user.password
 
             if check_password(db_password, item.password):
-                headers = remember(request, item.login)
+                headers = remember(request, item.username)
                 return HTTPFound(location=came_from,
                                  headers=headers)
         except IndexError as e:
-            message = e.message
+            message = "error {}".format(e)
 
     return {
         u'message': message,

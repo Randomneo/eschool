@@ -11,7 +11,7 @@ from .meta import Base
 class User(Base):
     __tablename__ = u'users'
     id = Column(Integer, primary_key=True)
-    name = Column(Text)
+    username = Column(Text)
     email = Column(Text)
     password = Column(Text)
     group = Column(Text)

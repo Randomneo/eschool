@@ -19,3 +19,7 @@
 .form-create_account input, .form-create_account .btn {
     border-radius: 0;
 }
+
+.invalid-feedback {
+    display: block;
+}

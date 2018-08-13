@@ -6,7 +6,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
 	<ul class="navbar-nav">
 	    <li class="nav-item">
-		<a href="${request.route_path('home')}" class="nav-link">Home</a>
+		<a href="${request.route_path('home')}" class="nav-link active">Home</a>
 	    </li>
 	    <li class="nav-item">
 		<a href="${request.route_path('list')}" class="nav-link">Journal</a>
