@@ -146,6 +146,7 @@ def restore_password_view(request):
 
         user.password = hash_password(item.password)
         user.token = None
+        user.activated = True
         log.debug(user.password)
         request.dbsession.flush()
         request.session.flash('success; Password changed')
