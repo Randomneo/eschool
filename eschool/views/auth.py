@@ -23,9 +23,12 @@ log = logging.getLogger(__name__)
 @view_config(route_name=u'login', renderer=u'../templates/login.mako')
 @forbidden_view_config(renderer=u'../templates/login.mako')
 def login(request):
+    log.debug(request.authenticated_userid)
+    if request.authenticated_userid:
+        log.debug(request.route_path('user_settings'))
+        return HTTPFound(request.route_path('user_settings'))
+
     form = Form(request,
-                defaults={u'username': u'',
-                          u'password': u''},
                 schema=UserSchema())
 
     login_url = request.resource_url(request.context, u'login')
@@ -40,13 +43,20 @@ def login(request):
             form.bind(item)
             user = request.dbsession.query(
                 User).filter(User.username == item.username).first()
-
             if user is None:
+                user = request.dbsession.query(
+                    User).filter(User.email == item.username).first()
+
+            if user is None or user.username is None:
                 raise IndexError(u"Wrong username or password")
+            if not user.activated:
+                request.session.flash("warning; Activate your account")
+                return HTTPFound(request.route_path('home'))
+
             db_password = user.password
 
             if check_password(db_password, item.password):
-                headers = remember(request, item.username)
+                headers = remember(request, user.username)
                 return HTTPFound(location=came_from,
                                  headers=headers)
         except IndexError as e:

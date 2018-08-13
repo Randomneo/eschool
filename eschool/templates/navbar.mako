@@ -1,3 +1,8 @@
+<%!
+from eschool.enums.groups import Groups
+from pyramid.security import Allowed
+%>
+
 <nav class="navbar stiky-top navbar-light navbar-expand-lg bg-light">
     <a class="navbar-brand" href="${request.route_path('home')}">Eschool</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,9 +13,12 @@
 	    <li class="nav-item">
 		<a href="${request.route_path('home')}" class="nav-link active">Home</a>
 	    </li>
-	    <li class="nav-item">
-		<a href="${request.route_path('list')}" class="nav-link">Journal</a>
-	    </li>
+
+	    % if request.has_permission('edit'):
+		<li class="nav-item">
+		    <a href="${request.route_path('list')}" class="nav-link">Journal</a>
+		</li>
+	    % endif
 	</ul>
 	<ul class="navbar-nav ml-auto">
 	    % if not request.authenticated_userid:
@@ -21,6 +29,9 @@
 		    <a href="${request.route_path('create_account')}" class="nav-link">Signup</a>
 		</li>
 	    % else:
+		<li class="nav-item">
+		    <a href="${request.route_path('user_settings')}" class="nav-link">User settings</a>
+		</li>
 		<li class="nav-item">
 		    <a href="${request.route_path('logout')}" class="nav-link">Logout</a>
 		</li>

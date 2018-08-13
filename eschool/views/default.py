@@ -1,7 +1,7 @@
 from pyramid.view import view_config
 
 from ..models.user import User
-
+from ..enums.groups import Groups
 
 @view_config(route_name='home', renderer='../templates/home.mako')
 def my_view(request):

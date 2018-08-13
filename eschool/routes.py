@@ -4,6 +4,7 @@ def includeme(config):
     config.add_route('logout', '/logout')
     config.add_route('create_account', '/create_account')
     config.add_route('confirm_account', '/confirm_account/{token}')
+    config.add_route('user_settings', '/user_settings')
 
     config.add_route('home', '/')
     config.add_route('list', '/list')

@@ -2,6 +2,6 @@
 
 <div class="content col-md-12">
     % for user in users:
-	<p>${user.username} - ${user.password}</p>
+	<p>${user.username} - ${user.password} - ${user.activated}</p>
     % endfor
 </div>

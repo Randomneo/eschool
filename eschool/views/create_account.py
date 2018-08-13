@@ -45,6 +45,11 @@ def create_account_view(request):
                         User.email == user.email).first():
                 request.dbsession.add(user)
                 request.dbsession.flush()
+            else:
+                request.session.flash("danger; User excist")
+                return {
+                    'form': FormRenderer(form),
+                }
         except SQLAlchemyError as e:
             log.exception(e)
             return HTTPFound('/')
@@ -60,6 +65,9 @@ def create_account_view(request):
 
         mailer.send(message)
 
+        request.session.flash("success; User created. Activate your mail")
+        return HTTPFound(request.route_path('home'))
+
     return {
         'form': FormRenderer(form),
     }
@@ -68,6 +76,9 @@ def create_account_view(request):
 @view_config(route_name='confirm_account',
              renderer='../templates/')
 def confirm_account_view(request):
-    user = request.dbsession.query(User).filter(User.token == request.matchdict('token')).first()
+    user = request.dbsession.query(User).filter(User.token == request.matchdict['token']).first()
     user.group = Groups.moderator
-    return {}
+    user.activated = True
+    request.session.flash('success; Account activated')
+
+    return HTTPFound(request.route_path('home'))

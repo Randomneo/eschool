@@ -17,6 +17,19 @@
     <body>
 	<%include file="navbar.mako"/>
 
+	<div class="row justify-content-md-center">
+	    <div class="col-md-10">
+		% for message in request.session.pop_flash():
+		    <div class="alert alert-${message.split(';')[0]} alert-dismissible fade show" role="alert">
+			${message.split(';')[1]}
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			</button>
+		    </div>
+		% endfor
+	    </div>
+	</div>
+
 	${ next.body() }
     </body>
 </html>

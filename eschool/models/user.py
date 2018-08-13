@@ -3,7 +3,10 @@ from sqlalchemy import (
     Index,
     Integer,
     Text,
+    Boolean,
 )
+
+from sqlalchemy.dialects.sqlite import BOOLEAN
 
 from .meta import Base
 
@@ -16,3 +19,4 @@ class User(Base):
     password = Column(Text)
     group = Column(Text)
     token = Column(Text)
+    activated = Column(BOOLEAN, default=False)
