@@ -21,7 +21,9 @@ def check_password(pw, hashed_pw):
 def groupfinder(userid, request):
     try:
         user = request.dbsession.query(User).filter(User.username == userid).first()
-        return [user.group]
+        if user is not None:
+            return [user.group]
+        return []
     except SQLAlchemyError as e:
         log.exception(e)
 
