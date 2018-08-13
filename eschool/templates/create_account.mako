@@ -25,10 +25,15 @@
 		</div>
 	    </div>
 	    <div class="form-group form-row justify-content-md-center">
-		<div class="col-5">
+		<div class="col-12">
 		    ${form.submit('submit', "Create", class_="btn btn-primary btn-block")}
 		</div>
-		<div class="col-3">
+	    </div>
+	    <div class="form-group form-row justify-content-md-center">
+		<div class="col-lg-6">
+		    <a href="${request.route_path('restore_account')}" class="btn btn-secondary btn-block">Restore account</a>
+		</div>
+		<div class="col-lg-6">
 		    <a href="${request.route_path('home')}", class="btn btn-secondary btn-block">Cancel</a>
 		</div>
 	    </div>

@@ -23,10 +23,15 @@
 		    ${renderer.text("password", class_="form-control", type="password", size=30, placeholder="Password")}
 		</div>
 		<div class="form-group form-row">
-		    <div class="col-5">
+		    <div class="col-12">
 			${renderer.submit("submit", "Submit", class_="btn btn-primary btn-block")}
 		    </div>
-		    <div class="col-7">
+		</div>
+		<div class="form-group form-row">
+		    <div class="col-6">
+			<a href="${request.route_path('restore_account')}" class="btn btn-secondary btn-block">Restore account</a>
+		    </div>
+		    <div class="col-6">
 			<a href="${request.route_path('create_account')}" class="btn btn-secondary btn-block">Create account</a>
 		    </div>
 		</div>

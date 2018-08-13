@@ -73,8 +73,7 @@ def create_account_view(request):
     }
 
 
-@view_config(route_name='confirm_account',
-             renderer='../templates/')
+@view_config(route_name='confirm_account')
 def confirm_account_view(request):
     user = request.dbsession.query(User).filter(User.token == request.matchdict['token']).first()
     user.group = Groups.moderator
@@ -82,3 +81,8 @@ def confirm_account_view(request):
     request.session.flash('success; Account activated')
 
     return HTTPFound(request.route_path('home'))
+
+@view_config(route_name='restore_account',
+             renderer='../templates/')
+def restore_account_view():
+    return {}
