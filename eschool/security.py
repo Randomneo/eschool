@@ -13,11 +13,9 @@ def hash_password(pw):
     return hashed_pw.decode('utf-8')
 
 
-def check_password(expected_hash, pw):
-    if expected_hash is not None:
-        return bcrypt.checkpw(pw.encode('utf-8'),
-                              expected_hash.encode('utf-8'))
-    return False
+def check_password(pw, hashed_pw):
+    expected_hash = hashed_pw.encode('utf-8')
+    return bcrypt.checkpw(pw.encode('utf-8'), expected_hash)
 
 
 def groupfinder(userid, request):

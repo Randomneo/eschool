@@ -17,7 +17,11 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from ..models.user import User
 from ..security import check_password, hash_password
-from ..schemes.user import CreateUserSchema
+from ..schemes.user import (
+    CreateUserSchema,
+    RestoreUserSchema,
+    RestoreUserPasswordSchema,
+)
 from ..enums.groups import Groups
 
 log = logging.getLogger(__name__)
@@ -40,9 +44,7 @@ def create_account_view(request):
 
         try:
             if not request.dbsession.query(User).filter(
-                    User.username == user.username).first()\
-                    and not request.dbsession.query(User).filter(
-                        User.email == user.email).first():
+                    User.email == user.email).first():
                 request.dbsession.add(user)
                 request.dbsession.flush()
             else:
@@ -78,11 +80,77 @@ def confirm_account_view(request):
     user = request.dbsession.query(User).filter(User.token == request.matchdict['token']).first()
     user.group = Groups.moderator
     user.activated = True
+    user.token = None
     request.session.flash('success; Account activated')
 
     return HTTPFound(request.route_path('home'))
 
+
 @view_config(route_name='restore_account',
-             renderer='../templates/')
-def restore_account_view():
-    return {}
+             renderer='../templates/restore_account.mako')
+def restore_account_view(request):
+    form = Form(request,
+                schema=RestoreUserSchema)
+
+    if form.validate():
+        token = uuid.uuid4().hex
+        url = request.route_url('restore_password', token=token)
+        mail_message = "Restore password with link\n{}\nif you accidently get this mail you can ignore it".format(url)
+
+        user = User()
+        form.bind(user)
+        user = request.dbsession.query(User).filter(User.email == user.email).first()
+        log.debug(user)
+        if user is None:
+            request.session.flash('warning; Cand find user with that username or email')
+            return {
+                'form': FormRenderer(form),
+            }
+
+        user.token = token
+
+        mailer = request.mailer
+
+        message = Message(
+            subject="Eschool, create account",
+            sender="eschool@randomneo.me",
+            recipients=[user.email],
+            body=mail_message
+        )
+
+        mailer.send(message)
+
+        request.session.flash("success; Message with restore link sent")
+        return HTTPFound(request.route_path('home'))
+
+    return {
+        'form': FormRenderer(form),
+    }
+
+
+@view_config(route_name='restore_password',
+             renderer='../templates/restore_password.mako')
+def restore_password_view(request):
+    token = request.matchdict['token']
+    form = Form(request,
+                schema=RestoreUserPasswordSchema)
+    user = request.dbsession.query(User).filter(User.token == token).first()
+    if user is None:
+        request.session.flash('danger; Token error try again or connect to developer')
+        return HTTPFound(request.route_path('home'))
+
+
+    if form.validate():
+        item = User()
+        form.bind(item)
+
+        user.password = hash_password(item.password)
+        user.token = None
+        log.debug(user.password)
+        request.dbsession.flush()
+        request.session.flash('success; Password changed')
+        return HTTPFound(request.route_path('home'))
+
+    return {
+        'form': FormRenderer(form),
+    }

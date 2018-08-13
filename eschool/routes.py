@@ -7,6 +7,7 @@ def includeme(config):
     config.add_route('confirm_account', '/confirm_account/{token}')
     config.add_route('user_settings', '/user_settings')
     config.add_route('restore_account', '/restore_account')
+    config.add_route('restore_password', '/restore_password/{token}')
 
     config.add_route('home', '/')
     config.add_route('list', '/list')

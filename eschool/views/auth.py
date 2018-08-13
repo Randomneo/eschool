@@ -14,7 +14,7 @@ from pyramid.httpexceptions import HTTPFound
 from pyramid_mailer.message import Message
 
 from ..models.user import User
-from ..security import check_password
+from ..security import check_password, hash_password
 from ..schemes.user import UserSchema
 
 log = logging.getLogger(__name__)
@@ -23,7 +23,6 @@ log = logging.getLogger(__name__)
 @view_config(route_name=u'login', renderer=u'../templates/login.mako')
 @forbidden_view_config(renderer=u'../templates/login.mako')
 def login(request):
-    log.debug(request.authenticated_userid)
     if request.authenticated_userid:
         log.debug(request.route_path('user_settings'))
         return HTTPFound(request.route_path('user_settings'))
@@ -42,10 +41,7 @@ def login(request):
             item = User()
             form.bind(item)
             user = request.dbsession.query(
-                User).filter(User.username == item.username).first()
-            if user is None:
-                user = request.dbsession.query(
-                    User).filter(User.email == item.username).first()
+                User).filter(User.email == item.email).first()
 
             if user is None or user.username is None:
                 raise IndexError(u"Wrong username or password")
@@ -55,7 +51,8 @@ def login(request):
 
             db_password = user.password
 
-            if check_password(db_password, item.password):
+            log.debug(db_password)
+            if check_password(item.password, db_password):
                 headers = remember(request, user.username)
                 return HTTPFound(location=came_from,
                                  headers=headers)
