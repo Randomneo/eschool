@@ -42,19 +42,14 @@ def create_account_view(request):
         user.token = token
         user.password = hash_password(user.password)
 
-        try:
-            if not request.dbsession.query(User).filter(
-                    User.email == user.email).first():
-                request.dbsession.add(user)
-                request.dbsession.flush()
-            else:
-                request.session.flash("danger; User excist")
-                return {
-                    'form': FormRenderer(form),
+        if not request.dbsession.query(User).filter(
+                User.email == user.email).first():
+            request.dbsession.add(user)
+        else:
+            request.session.flash("danger; User excist")
+            return {
+                'form': FormRenderer(form),
                 }
-        except SQLAlchemyError as e:
-            log.exception(e)
-            return HTTPFound('/')
 
         mailer = request.mailer
 
@@ -66,6 +61,11 @@ def create_account_view(request):
         )
 
         mailer.send(message)
+        try:
+            request.dbsession.flush()
+        except SQLAlchemyError as e:
+            log.exception(e)
+            return HTTPFound('/')
 
         request.session.flash("success; User created. Activate your mail")
         return HTTPFound(request.route_path('home'))
