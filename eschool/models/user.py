@@ -19,4 +19,4 @@ class User(Base):
     password = Column(Text)
     group = Column(Text)
     token = Column(Text)
-    activated = Column(BOOLEAN, default=False)
+    activated = Column(Boolean, default=False)
