@@ -7,6 +7,7 @@ from pyramid.authorization import ACLAuthorizationPolicy
 from .restources import Root
 from .security import groupfinder
 
+
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """

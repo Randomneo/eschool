@@ -106,6 +106,9 @@ def restore_account_view(request):
             return {
                 'form': FormRenderer(form),
             }
+        if user.group == Groups.admin:
+            request.session.flash('warning; admin cant restore password you need to use sever scripts to delete admin and create new one')
+            return HTTPFound(request.route_path('home'))
 
         user.token = token
 

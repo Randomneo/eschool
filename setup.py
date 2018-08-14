@@ -61,6 +61,7 @@ setup(
             'initialize_eschool_db = eschool.scripts.initializedb:main',
             'create_user = eschool.scripts.create_user:main',
             'delete_all_users = eschool.scripts.delete_all_users:main',
+            'create_admin = eschool.scripts.create_admin:main',
         ],
     },
 )

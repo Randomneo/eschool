@@ -19,6 +19,11 @@ from pyramid.security import Allowed
 		    <a href="${request.route_path('list')}" class="nav-link">Journal</a>
 		</li>
 	    % endif
+	    % if request.has_permission('edit_users'):
+		<li class="nav-item">
+		    <a href="${request.route_path('edit_users')}" class="nav-link">Edit users</a>
+		</li>
+	    % endif
 	</ul>
 	<ul class="navbar-nav ml-auto">
 	    % if not request.authenticated_userid:
