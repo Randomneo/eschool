@@ -10,6 +10,7 @@ def includeme(config):
     config.add_route('restore_password', '/restore_password/{token}')
 
     config.add_route('edit_users', '/edit_users')
+    config.add_route('delete_user', '/delete_user/{id}')
 
     config.add_route('home', '/')
     config.add_route('list', '/list')

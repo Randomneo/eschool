@@ -78,7 +78,7 @@ def create_account_view(request):
 @view_config(route_name='confirm_account')
 def confirm_account_view(request):
     user = request.dbsession.query(User).filter(User.token == request.matchdict['token']).first()
-    user.group = Groups.moderator
+    user.group = Groups.student
     user.activated = True
     user.token = None
     request.session.flash('success; Account activated')

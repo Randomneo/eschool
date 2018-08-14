@@ -11,7 +11,10 @@ from pyramid.security import (
     remember,
     forget,
 )
-from pyramid.httpexceptions import HTTPFound
+from pyramid.httpexceptions import (
+    HTTPFound,
+    HTTPOk,
+)
 from pyramid_mailer.message import Message
 from sqlalchemy.exc import SQLAlchemyError
 
@@ -31,5 +34,26 @@ log = logging.getLogger(__name__)
              renderer='../templates/edit_users.mako',
              permission='edit_users')
 def edit_users_view(request):
+    users = request.dbsession.query(User)\
+                             .filter(User.group != Groups.admin)\
+                             .order_by(User.username.asc())
 
-    return {}
+    return {
+        'users': users,
+    }
+
+
+@view_config(route_name='delete_user',
+             permission='edit_users')
+def delete_user_view(request):
+    id = request.matchdict['id']
+
+    try:
+        request.dbsession.query(User).filter(User.id == id).delete()
+        request.dbsession.flush()
+    except SQLAlchemyError:
+        request.session.flash('danger; Cant delete user')
+        raise HTTPFound(request.route_path('edit_users'))
+
+    request.session.flash('success; User deleted')
+    return HTTPFound(request.route_path('edit_users'))
