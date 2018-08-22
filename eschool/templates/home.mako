@@ -7,7 +7,7 @@
 		Eschool
 	    </h1>
 	    <h4>
-		Welcome to Eschool. This web application for schools and universities will help teachers put marks and for students follow them up.
+		This web application for schools and universities. It will help teachers estimate students. And help students follow up them's marks.
 	    </h4>
 	</main>
 	<footer class="mastfoot mt-auto">

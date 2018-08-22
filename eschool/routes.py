@@ -14,3 +14,5 @@ def includeme(config):
 
     config.add_route('home', '/')
     config.add_route('list', '/list')
+
+    config.add_route('list_subjects', '/list_subjects')

@@ -9,6 +9,8 @@ class Root(object):
         (Allow, Groups.admin, 'edit_users'),
         (Allow, Groups.teacher, 'edit_students'),
         (Allow, Groups.moderator, 'edit'),
+        (Allow, Groups.teacher, 'edit_subject'),
+        (Allow, Groups.admin, 'edit_subject'),
     ]
 
     def __init__(self, request):
