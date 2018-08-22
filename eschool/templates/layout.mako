@@ -17,6 +17,7 @@
     <body>
 	<%include file="navbar.mako"/>
 
+	% if request.session.peek_flash():
 	<div class="row justify-content-md-center">
 	    <div class="col-md-10">
 		% for message in request.session.pop_flash():
@@ -29,6 +30,7 @@
 		% endfor
 	    </div>
 	</div>
+	% endif
 
 	${ next.body() }
     </body>

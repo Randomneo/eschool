@@ -1,7 +1,7 @@
 <%inherit file="layout.mako" />
 
 
-<div class="row justify-content-center">
+<div class="col row justify-content-center">
     <div class="col-md-12 col-xl-8">
 	<table class="table table-bordered algin-middle">
 	    <thead>
