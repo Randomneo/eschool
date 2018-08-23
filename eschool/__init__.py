@@ -26,7 +26,7 @@ def main(global_config, **settings):
     config.set_authorization_policy(authz_policy)
 
     config.include(u'pyramid_mako')
-    config.include('pyramid_mailer')
+    config.include('pyramid_mailer.debug')
     config.include(u'.models')
     config.include(u'.routes')
     config.scan()
