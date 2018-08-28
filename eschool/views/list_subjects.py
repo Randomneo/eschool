@@ -19,7 +19,7 @@ from pyramid_mailer.message import Message
 from sqlalchemy.exc import SQLAlchemyError
 
 from ..models.user import User
-from ..models.subject import Subject
+from ..models.shedule import Subject
 from ..security import check_password, hash_password
 from ..schemes.user import (
     CreateUserSchema,
