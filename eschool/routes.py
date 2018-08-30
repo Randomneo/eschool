@@ -16,3 +16,5 @@ def includeme(config):
     config.add_route('list', '/list')
 
     config.add_route('list_subjects', '/list_subjects')
+    config.add_route('create_subject', '/create_subject')
+    config.add_route('delete_subject', '/delete_subject/{id}')

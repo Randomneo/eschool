@@ -26,6 +26,7 @@ from ..schemes.user import (
     RestoreUserSchema,
     RestoreUserPasswordSchema,
 )
+from ..schemes.subject import CreateSubjectSchema
 from ..enums.groups import Groups
 
 log = logging.getLogger(__name__)
@@ -33,10 +34,13 @@ log = logging.getLogger(__name__)
 
 @view_config(route_name='list_subjects',
              renderer='../templates/list_subjects.mako',
-             permission='edit_subject')
+             permission='edit_subjects')
 def list_subjects(request):
-    subjects = request.dbsession.query(Subject).order_by(Subject.name.asc()).all()
+    subjects = request.dbsession.query(Subject).order_by(Subject.name.asc())
+    form = Form(request,
+                schema=CreateSubjectSchema())
     
     return {
+        'form': FormRenderer(form),
         'subjects': subjects,
     }

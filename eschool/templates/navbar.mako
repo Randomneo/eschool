@@ -24,7 +24,7 @@ from pyramid.security import Allowed
 		    <a href="${request.route_path('edit_users')}" class="nav-link">Edit users</a>
 		</li>
 	    % endif
-	    % if request.has_permission('edit_subject'):
+	    % if request.has_permission('edit_subjects'):
 		<li class="nav-item">
 		    <a href="${request.route_path('list_subjects')}" class="nav-link">Subjects</a>
 		</li>
