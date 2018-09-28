@@ -1,5 +1,30 @@
 <%inherit file="layout.mako"/>
 
+<script>
+ $(function (){
+     $('#AddDay').click(function(e) {
+
+         var form = $(".md-form");
+         var formData = $(form).serialize();
+	 $.ajax({
+	     type: "POST",
+	     url: "${request.route_path('create_subject')}",
+	     data: formData,
+	     success: function (data) {
+		 location.reload();
+		 //TODO update table
+		 $('#exampleModal').modal('hide');
+	     },
+	     error: function (xhr, ajaxOptions, thrownError) {
+		 var s = JSON.parse(xhr.responseText);
+		 alert(s['message']);
+	     }
+	 });
+     });
+ });
+</script>
+
+
 <div class="col justify-content-center d-flex">
     <div class="col-xl-11 col-lg-12 col-md-12 row justify-content-lg-start justify-content-md-center d-flex">
         % for day in shedule:
@@ -140,7 +165,7 @@
 		        </div>
 		        <div class="modal-footer">
 			    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			    <button type="button" class="btn btn-primary" id="create">Create subject</button>
+			    <button type="button" class="btn btn-primary" id="AddDay">Create subject</button>
 		        </div>
 		    </div>
 	        </div>

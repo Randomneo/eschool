@@ -17,7 +17,6 @@
 	     },
 	     error: function (xhr, ajaxOptions, thrownError) {
 		 var s = JSON.parse(xhr.responseText);
-		 console.log(s);
 		 alert(s['message']);
 	     }
 	 });
