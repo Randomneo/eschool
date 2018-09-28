@@ -41,9 +41,6 @@ html, body {
     margin-bottom: 20px;
 }
 
-@media (max-width: 992px)
-{
-    .shedule-day {
-	margin-bottom: 20px;
-    }
+.shedule-day {
+    margin-bottom: 20px;
 }
