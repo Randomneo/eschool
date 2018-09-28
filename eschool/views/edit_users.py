@@ -31,7 +31,7 @@ log = logging.getLogger(__name__)
 
 
 @view_config(route_name='edit_users',
-             renderer='../templates/edit_users.mako',
+             renderer='../templates/user/edit_users.mako',
              permission='edit_users')
 def edit_users_view(request):
     users = request.dbsession.query(User)\

@@ -24,7 +24,7 @@ log = logging.getLogger(__name__)
 
 
 @view_config(route_name='user_settings',
-             renderer='../templates/user_settings.mako')
+             renderer='../templates/user/user_settings.mako')
 def user_settings_view(request):
     username = request.authenticated_userid
     user = request.dbsession.query(User).filter(User.username == username).first()

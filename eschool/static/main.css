@@ -36,3 +36,18 @@ html, body {
 .ct-button {
     margin-bottom: 10px;
 }
+
+.shedule-row {
+    margin-bottom: 20px;
+}
+
+.list-group-item-header {
+    
+}
+
+@media (max-width: 992px)
+{
+    .shedule-day {
+	margin-bottom: 20px;
+    }
+}

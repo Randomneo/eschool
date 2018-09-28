@@ -83,7 +83,7 @@
 			<th>${i}</th>
 			<th>${subject.name}</th>
 			% if request.has_permission('edit_subjects'):
-			<th>
+			<th class="text-center">
 			    <a href="${request.route_path('delete_subject', id=subject.id)}" class="btn btn-danger">
 				<i class="fa fa-trash"></i>
 			    </a>

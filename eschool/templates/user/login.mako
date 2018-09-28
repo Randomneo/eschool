@@ -1,4 +1,4 @@
-<%inherit file="layout.mako"/>
+<%inherit file="../layout.mako"/>
 
 <main role="main">
 <div class="container">

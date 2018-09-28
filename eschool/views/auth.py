@@ -20,8 +20,8 @@ from ..schemes.user import UserSchema
 log = logging.getLogger(__name__)
 
 
-@view_config(route_name=u'login', renderer=u'../templates/login.mako')
-@forbidden_view_config(renderer=u'../templates/login.mako')
+@view_config(route_name=u'login', renderer=u'../templates/user/login.mako')
+@forbidden_view_config(renderer=u'../templates/user/login.mako')
 def login(request):
     if request.authenticated_userid:
         log.debug(request.route_path('user_settings'))

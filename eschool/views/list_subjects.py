@@ -39,7 +39,7 @@ def list_subjects(request):
     subjects = request.dbsession.query(Subject).order_by(Subject.name.asc())
     form = Form(request,
                 schema=CreateSubjectSchema())
-    
+
     return {
         'form': FormRenderer(form),
         'subjects': subjects,

@@ -1,4 +1,4 @@
-<%inherit file="layout.mako" />
+<%inherit file="../layout.mako" />
 
 
 <div class="col row justify-content-center">

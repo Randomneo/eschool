@@ -28,7 +28,7 @@ log = logging.getLogger(__name__)
 
 
 @view_config(route_name='create_account',
-             renderer='../templates/create_account.mako')
+             renderer='../templates/user/create_account.mako')
 def create_account_view(request):
     form = Form(request,
                 schema=CreateUserSchema())
@@ -87,7 +87,7 @@ def confirm_account_view(request):
 
 
 @view_config(route_name='restore_account',
-             renderer='../templates/restore_account.mako')
+             renderer='../templates/user/restore_account.mako')
 def restore_account_view(request):
     form = Form(request,
                 schema=RestoreUserSchema)
@@ -132,7 +132,7 @@ def restore_account_view(request):
 
 
 @view_config(route_name='restore_password',
-             renderer='../templates/restore_password.mako')
+             renderer='../templates/user/restore_password.mako')
 def restore_password_view(request):
     token = request.matchdict['token']
     form = Form(request,
