@@ -41,10 +41,6 @@ html, body {
     margin-bottom: 20px;
 }
 
-.list-group-item-header {
-    
-}
-
 @media (max-width: 992px)
 {
     .shedule-day {
