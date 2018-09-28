@@ -11,6 +11,7 @@ class Root(object):
         (Allow, Groups.moderator, 'edit'),
         (Allow, Groups.teacher, 'edit_subjects'),
         (Allow, Groups.admin, 'edit_subjects'),
+        (Allow, Groups.admin, 'edit_shedule'),
     ]
 
     def __init__(self, request):

@@ -4,12 +4,12 @@
  $(function (){
      $('#create').click(function(e) {
 
+         var form = $(".md-form");
+         var formData = $(form).serialize();
 	 $.ajax({
 	     type: "POST",
 	     url: "${request.route_path('create_subject')}",
-	     data: {
-		 'name': $("#name").val()
-	     },
+	     data: formData,
 	     success: function (data) {
 		 location.reload();
 		 //TODO update table
@@ -45,6 +45,7 @@
 		    </div>
 		    <div class="modal-body">
 			${form.begin(class_="md-form")}
+                        ${form.csrf_token()}
 			${form.text('name', class_='form-control', autocomplete='off', placeholder="Subject name")}
 			<div class="invalid_feedback text-left">
 			    ${form.errorlist("name")}

@@ -1,30 +1,41 @@
 import logging
 from pyramid.view import view_config
-from pyramid.httpexceptions import HTTPFound
+from pyramid.httpexceptions import HTTPFound, HTTPNotFound
 from sqlalchemy.exc import SQLAlchemyError
+from pyramid_simpleform import Form
 
 from ..models.shedule import Subject
+from ..schemes.subject import CreateSubjectSchema
 
 log = logging.getLogger(__name__)
+
 
 @view_config(route_name='create_subject',
              permission='edit_subjects',
              renderer='json')
 def create_subject(request):
-    name = request.params.get('name')
-    if name is None or name == '':
-        request.response.status_code = 400
-        return {'message': 'No subject name'}
+    form = Form(request, schema=CreateSubjectSchema)
+    if form.validate():
+        token = request.POST.get("_csrf")
+        if token is None or token != request.session.get_csrf_token():
+            raise HTTPNotFound
 
-    subject = Subject()
-    subject.name = name
-    try:
-        request.dbsession.add(subject)
-    except SQLAlchemyError:
+        name = form.data['name']
+        if name is None or name == '':
+            request.response.status_code = 400
+            return {'message': 'No subject name'}
+
+        subject = Subject()
+        subject.name = name
+        try:
+            request.dbsession.add(subject)
+        except SQLAlchemyError:
+            request.response.status_code = 400
+            request.dbsession.rollback()
+            return {'message': 'Database error connet to developer via homepage'}
+    else:
         request.response.status_code = 400
-        request.dbsession.rollback()
-        return {'message': 'Database error connet to developer via homepage'}
-    return {}
+        return {'message': 'Cant validate form'}
 
 
 @view_config(route_name='delete_subject',
