@@ -2,14 +2,14 @@
 
 <main role="main">
 <div class="container">
-    % if not message == "":
-	<p>${message}</p>
-    % endif
 
     <div class="text-center">
 	<div class="row justify-content-md-center">
 	    <div class="col-md-8 col-lg-6" class="text-center">
 		<h1 class="h3">Login</h1>
+		% if message is not None:
+		    <div class="invalid-feedback">${message}</div>
+		% endif
 		% if (renderer.errorlist("email") or renderer.errorlist("password")):
 		    <div class="invalid-feedback">
 			wrong username or password

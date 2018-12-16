@@ -2,6 +2,10 @@
 
 <script>
  $(function (){
+     $('.md-form').submit( function(event) {
+	 event.preventDefault();
+	 $('#create').trigger('click');
+     });
      $('#create').click(function(e) {
 
          var form = $(".md-form");

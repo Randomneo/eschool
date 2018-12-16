@@ -35,7 +35,7 @@ def login(request):
     if referrer == login_url:
         referrer = '/'  # never use the login form itself as came_from
     came_from = request.params.get(u'came_from', referrer)
-    message = ''
+    message = None
     if form.validate():
         try:
             item = User()
@@ -56,8 +56,10 @@ def login(request):
                 headers = remember(request, user.username)
                 return HTTPFound(location=came_from,
                                  headers=headers)
+            else:
+                raise IndexError(u"Wrong username or password")
         except IndexError as e:
-            message = "error {}".format(e)
+            message = "{}".format(e)
 
     return {
         u'message': message,
