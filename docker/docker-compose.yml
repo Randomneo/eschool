@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+  nginx:
+    image: nginx
+    tty: true
+    volumes:
+      - ..:/opt/eschool
+      - ./config/nginx:/etc/nginx
+    depends_on:
+      - eschool
+    networks:
+      app_net:
+        ipv4_address: 172.168.0.100
+  eschool:
+    build: ./.
+    tty: true
+    volumes:
+      - ..:/opt/eschool
+    networks:
+      app_net:
+        ipv4_address: 172.168.0.111
+
+networks:
+  app_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        -
+          subnet: 172.168.0.0/24

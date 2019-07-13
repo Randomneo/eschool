@@ -24,7 +24,6 @@ log = logging.getLogger(__name__)
 @forbidden_view_config(renderer=u'../templates/user/login.mako')
 def login(request):
     if request.authenticated_userid:
-        log.debug(request.route_path('user_settings'))
         return HTTPFound(request.route_path('user_settings'))
 
     form = Form(request,
@@ -51,7 +50,6 @@ def login(request):
 
             db_password = user.password
 
-            log.debug(db_password)
             if check_password(item.password, db_password):
                 headers = remember(request, user.username)
                 return HTTPFound(location=came_from,
@@ -60,6 +58,8 @@ def login(request):
                 raise IndexError(u"Wrong username or password")
         except IndexError as e:
             message = "{}".format(e)
+    else:
+        log.error(form.errors)
 
     return {
         u'message': message,
