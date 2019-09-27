@@ -1,3 +1,5 @@
+# TODO: Add proper README.md and upgrade it for docker
+
 eschool
 =======
 
